@@ -1,0 +1,26 @@
+export const menu = [{
+    id:"1",
+    menuItem:"HOme",
+    path:"/home"
+},
+{
+    id:"2",
+    menuItem:"ABout",
+    path:"/about"
+},
+{
+    id:"3",
+    menuItem:"SErvices",
+    path:"/services"
+},
+{
+    id:"4",
+    menuItem:"COntact",
+    path:"/contact"
+},
+{
+    id:"5",
+    menuItem:"LOgin",
+    path:'/login'
+}
+]
