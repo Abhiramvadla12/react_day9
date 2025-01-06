@@ -6,7 +6,7 @@ import Otp from "../components/otp";
 import Home from "../components/Home";
 function App() {
   return (
-    <Router>
+    <Router basename="/react_day9">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
