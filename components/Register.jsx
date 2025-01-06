@@ -31,6 +31,16 @@ function Register() {
       localStorage.setItem("login_credential", JSON.stringify(localData));
 
       // Navigate to OTP page with user data
+      function generateOtp() {
+        let otp = '';
+        for (let i = 0; i < 4; i++) {
+            otp += Math.floor(Math.random() * 10); // Generate a single digit and append to the OTP
+        }
+        return otp;
+    }
+    
+    const otp = generateOtp();
+    localStorage.setItem("otp", JSON.stringify(otp));
       alert("Registration successful. Redirecting to OTP verification in 3 seconds...");
       setTimeout(()=>{
         navigate("/otp", { state: { user: newUser } });
@@ -83,6 +93,7 @@ function Register() {
         />
         <br />
         <input type="submit" value="Register" id="submit" />
+        
       </form>
     </>
   );
