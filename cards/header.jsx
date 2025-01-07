@@ -1,12 +1,13 @@
 import './header.css'
 import {menu} from "../data/header_data"
+import logoImage from '../images/Art.jpeg' 
 const Header = ()=>{
-   
+
    
     return (
         <>
         <div className="header" >
-            <img src="../images/Art.jpeg" alt="image not found" id='img' />
+            <img src={logoImage} alt="image not found" id='img' />
                 <div className="nav">
                     <ul>
                         <>

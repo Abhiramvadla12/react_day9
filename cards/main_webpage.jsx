@@ -8,7 +8,7 @@ const Main = ()=>{
         <div className="main" >
                 {cards.map((element, index) => (
                     <>
-                        <div className="anime_cards" key={index}>
+                        <div className="anime_cards" key={element.id}>
                             <img src={element.image} alt="image not found" />
                             <p>Name: {element.name}</p>
                             <p>My rating: {element.myRating}</p>
