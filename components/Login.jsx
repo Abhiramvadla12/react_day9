@@ -56,7 +56,7 @@ function Login() {
       }, 3000);
     } else {
       if (confirm("User not found. Do you want to register?")) {
-        alert("Registration successful. Redirecting in 3 seconds...");
+        
         setTimeout(()=>{
             navigate("/register"); // Redirect to the Register page
         },3000)
