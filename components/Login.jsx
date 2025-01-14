@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 import './login.css';
 import Image from '../images/google.png';
@@ -10,7 +9,6 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-
 
 // Firebase configuration
 const firebaseConfig = {
@@ -27,6 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+
 function Login() {
   const navigate = useNavigate(); // Initialize useNavigate
   const [state, setState] = useState({
@@ -81,15 +80,10 @@ function Login() {
         navigate("/home"); // Redirect to the home page
       }, 3000);
     } else {
-<<<<<<< HEAD
       if (confirm("User not found. Do you want to register?")) {
-=======
-      if (confirm("User not found. Do you want to register?"))
->>>>>>> 825e53724373c0376b413f14b975b63f4467e74c
-        setTimeout(()=>{
-            navigate("/register"); // Redirect to the Register page
-        },3000)
-        
+        setTimeout(() => {
+          navigate("/register"); // Redirect to the Register page
+        }, 3000);
       }
     }
   };
@@ -101,6 +95,7 @@ function Login() {
       [name]: value,
     }));
   };
+
   const [user, setUser] = useState(null);
 
   // Handle authentication state changes
@@ -111,8 +106,8 @@ function Login() {
     return () => unsubscribe();
   }, []);
 
-   // Sign in with Google
-   const signInWithGoogle = async () => {
+  // Sign in with Google
+  const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const googleUser = result.user;
@@ -136,13 +131,11 @@ function Login() {
     }
   };
 
-  
- 
   const { username, password, email } = state;
 
   return (
     <>
-       <h1 style={{color: "white"}}>Login Page</h1>
+      <h1 style={{ color: "white" }}>Login Page</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
@@ -175,13 +168,13 @@ function Login() {
         />
         <br />
         <input type="submit" value="Login" id="submit" /> <br />
-        
-          <div className="google_button">
-            <img src={Image} alt="image not Found" style={{height: "40px", width:"40px"}} />
-            <button onClick={signInWithGoogle} id="signIn" style={{border: "none", outline:"none",backgroundColor: "black",color:"white"}}>Sign In With Google</button>
-          </div>
-          
-       
+
+        <div className="google_button">
+          <img src={Image} alt="image not Found" style={{ height: "40px", width: "40px" }} />
+          <button onClick={signInWithGoogle} id="signIn" style={{ border: "none", outline: "none", backgroundColor: "black", color: "white" }}>
+            Sign In With Google
+          </button>
+        </div>
       </form>
     </>
   );
