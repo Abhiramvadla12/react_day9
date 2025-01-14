@@ -81,7 +81,11 @@ function Login() {
         navigate("/home"); // Redirect to the home page
       }, 3000);
     } else {
+<<<<<<< HEAD
       if (confirm("User not found. Do you want to register?")) {
+=======
+      if (confirm("User not found. Do you want to register?"))
+>>>>>>> 825e53724373c0376b413f14b975b63f4467e74c
         setTimeout(()=>{
             navigate("/register"); // Redirect to the Register page
         },3000)
