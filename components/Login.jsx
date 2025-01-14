@@ -38,10 +38,7 @@ function Login() {
     e.preventDefault();
     const { username, password, email } = state;
 
-    if (!username || !password || !email) {
-      alert("Please fill in all fields.");
-      return;
-    }
+    
 
     const usernameRegex = /^[a-zA-Z0-9_ ]{3,15}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
