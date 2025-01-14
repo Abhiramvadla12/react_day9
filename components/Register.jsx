@@ -147,7 +147,7 @@ function Register() {
         <input type="submit" value="Register" id="submit" />
         <div className="google_button">
           <img src={Image} alt="image not Found" style={{height: "40px", width:"40px"}} />
-          <button onClick={handleGoogleSignUp} id="signUp"  style={{border: "none", outline:"none",backgroundColor: "black",color:"white"}}>Sign Up With Google</button>
+          <button onClick={handleGoogleSignUp} id="signUp"  style={{border: "none", outline:"none",backgroundColor: "black",color:"white"}} type="button">Sign Up With Google</button>
         </div>
       </form>
       

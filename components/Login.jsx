@@ -38,7 +38,10 @@ function Login() {
     e.preventDefault();
     const { username, password, email } = state;
 
-    
+    if (!username || !password || !email) {
+      alert("Please fill in all fields.");
+      return;
+    }
 
     const usernameRegex = /^[a-zA-Z0-9_ ]{3,15}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -168,7 +171,7 @@ function Login() {
 
         <div className="google_button">
           <img src={Image} alt="image not Found" style={{ height: "40px", width: "40px" }} />
-          <button onClick={signInWithGoogle} id="signIn" style={{ border: "none", outline: "none", backgroundColor: "black", color: "white" }}>
+          <button onClick={signInWithGoogle} id="signIn" style={{ border: "none", outline: "none", backgroundColor: "black", color: "white" }} type="button">
             Sign In With Google
           </button>
         </div>
