@@ -1,11 +1,35 @@
-
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './register.css'
+import './register.css';
+import Image from '../images/google.png';
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCayPz9j7ZWp52OBXbVD1imtb-zmW2yQ7k",
+  authDomain: "sign-project-12ec6.firebaseapp.com",
+  projectId: "sign-project-12ec6",
+  storageBucket: "sign-project-12ec6.firebaseapp.com",
+  messagingSenderId: "180719521684",
+  appId: "1:180719521684:web:d5b424ba6034012e018981",
+  measurementId: "G-6FV3NN9MZQ",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
 function Register() {
   const [state, setState] = useState({ username: "", password: "", email: "" });
   const navigate = useNavigate();
 
+  // Handle registration form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const { username, password, email } = state;
@@ -14,8 +38,6 @@ function Register() {
       alert("Please fill in all fields.");
       return;
     }
-
-    // Add validation logic here...
 
     const localData = JSON.parse(localStorage.getItem("login_credential")) || [];
     const userFound = localData.some(
@@ -30,25 +52,54 @@ function Register() {
       localData.push(newUser);
       localStorage.setItem("login_credential", JSON.stringify(localData));
 
-      // Navigate to OTP page with user data
       function generateOtp() {
         let otp = '';
         for (let i = 0; i < 4; i++) {
-            otp += Math.floor(Math.random() * 10); // Generate a single digit and append to the OTP
+          otp += Math.floor(Math.random() * 10);
         }
         return otp;
-    }
-    
-    const otp = generateOtp();
-    localStorage.setItem("otp", JSON.stringify(otp));
+      }
+
+      const otp = generateOtp();
+      localStorage.setItem("otp", JSON.stringify(otp));
       alert("Registration successful. Redirecting to OTP verification in 3 seconds...");
-      setTimeout(()=>{
+      setTimeout(() => {
         navigate("/otp", { state: { user: newUser } });
-      },3000)
-      
+      }, 3000);
     }
   };
 
+  // Handle Google sign-up
+  const handleGoogleSignUp = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Check if this Google email is already in localStorage under google_signups
+      const googleData = JSON.parse(localStorage.getItem("google_signups")) || [];
+      const googleUserFound = googleData.some((googleUser) => googleUser.email === user.email);
+
+      if (googleUserFound) {
+        alert("This Google account is already registered. Redirecting to login...");
+        navigate("/");
+      } else {
+        // Save Google user data in a separate localStorage object
+        const newGoogleUser = {
+          displayName: user.displayName || "Google User", // Use Google display name or fallback
+          email: user.email,
+        };
+        googleData.push(newGoogleUser);
+        localStorage.setItem("google_signups", JSON.stringify(googleData));
+        navigate("/");
+        
+      }
+    } catch (error) {
+      console.error("Error signing up with Google:", error);
+      alert("There was an issue signing up with Google. Please try again.");
+    }
+  };
+
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -61,6 +112,7 @@ function Register() {
 
   return (
     <>
+      <h1 style={{ color: "white" }}>Register</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
@@ -93,8 +145,12 @@ function Register() {
         />
         <br />
         <input type="submit" value="Register" id="submit" />
-        
+        <div className="google_button">
+          <img src={Image} alt="image not Found" style={{height: "40px", width:"40px"}} />
+          <button onClick={handleGoogleSignUp} id="signUp"  style={{border: "none", outline:"none",backgroundColor: "black",color:"white"}}>Sign Up With Google</button>
+        </div>
       </form>
+      
     </>
   );
 }

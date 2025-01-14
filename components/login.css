@@ -34,3 +34,14 @@ h1{
   body {
     background-color:black;
 }
+img{
+    height: 20xp;
+    width: 20px;
+}
+.google_button{
+    display: flex;
+    border: 2px solid black;
+    background-color: black;
+    border-radius: 10px;
+    width: 15em;
+}

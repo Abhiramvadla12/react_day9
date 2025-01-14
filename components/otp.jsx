@@ -30,7 +30,8 @@ const Otp = () => {
   }
   
   return (
-    <>
+    <> 
+        <h1>Otp Page</h1>
         <form onSubmit={(e)=>{
                 handlesubmit(e)
             }}>
